@@ -112,7 +112,11 @@ const App: React.FC = () => {
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb> 
 
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+          <div style={{ 
+            padding: 24,
+            minHeight: "75vh", 
+            background: colorBgContainer 
+          }}>
 
             <Routes>
               <Route path="/" element={<Home/>}/>

@@ -1,19 +1,21 @@
 import React from 'react';
-import { Card } from 'antd';
-
+import { Button, Space } from 'antd';
+import ArticalsTable from '../../components/articalsTable/ArticalsTable';
 
 
 const Articles: React.FC = () => {
-    var test = 0;
+
     return (
-        <div> 
-            <p>Ты блять</p>    
+        <div style={{textAlign: 'center'}}>
+
+            <Space style={{paddingBottom: 20}}>
+                <Button type="primary">Load Articals</Button>
+                <Button type="primary">Parse Articals</Button>
+            </Space>
+
+            <ArticalsTable/>
+
         </div>
-        // <Card title="Card title" bordered={false} style={{ width: 300 }}>
-        //     <p>Card content</p>
-        //     <p>Card content</p>
-        //     <p>Card content</p>
-        // </Card>
     );
 };
 
