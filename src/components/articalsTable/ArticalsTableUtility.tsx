@@ -13,40 +13,17 @@ export interface DataType {
     author: string;
     date:   string;
     description: string;
+    action: any;
 }
 
-export type DataIndex = keyof DataType;
-
-const data: DataType[] = [
-    {
-        key: 1,
-        title: 'John Brown',
-        author: "w",
-        date: "12.32.2",
-        description: 'New York No. 1 Lake Park',
-    },
-    {
-        key: 2,
-        title: 'John Brown',
-        author: "w",
-        date: "12.32.2",
-        description: 'New York No. 1 Lake Park',
-    },
-    {
-        key: 3,
-        title: 'John Brown',
-        author: "w",
-        date: "12.32.2",
-        description: 'New York No. 1 Lake Park',
-    },
-  ];
+type DataIndex = keyof DataType;
 
 const handleSearch = (
     selectedKeys: string[],
     confirm: (param?: FilterConfirmProps) => void,
     dataIndex: DataIndex,
-    callbackSetSearchText:     (value: React.SetStateAction<string>) => void,
-    callbackSetSearchedColumn: (value: React.SetStateAction<string>) => void
+    callbackSetSearchText:     (value: React.SetStateAction<string | undefined>) => void,
+    callbackSetSearchedColumn: (value: React.SetStateAction<string | undefined>) => void
 ) => {
     confirm();
     callbackSetSearchText(selectedKeys[0]);
@@ -55,7 +32,7 @@ const handleSearch = (
 
 const handleReset = (
     clearFilters: () => void,
-    callbackSetSearchText: (value: React.SetStateAction<string>) => void,
+    callbackSetSearchText: (value: React.SetStateAction<string | undefined>) => void,
 ) => {
     clearFilters();
     callbackSetSearchText('');
@@ -64,10 +41,10 @@ const handleReset = (
 const getColumnSearchProps = (
     dataIndex:      DataIndex,
     searchInput:    React.RefObject<InputRef>,
-    searchText:     string,
-    searchedColumn: string,
-    callbackSetSearchText:      (value: React.SetStateAction<string>) => void,
-    callbackSetSearchedColumn:  (value: React.SetStateAction<string>) => void
+    searchText:     string | undefined,
+    searchedColumn: string | undefined,
+    callbackSetSearchText:      (value: React.SetStateAction<string | undefined>) => void,
+    callbackSetSearchedColumn:  (value: React.SetStateAction<string | undefined>) => void
 
     ): ColumnType<DataType> => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -153,7 +130,7 @@ const getColumnSearchProps = (
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[searchText]}
+          searchWords={[searchText !== undefined ? searchText : '']}
           autoEscape
           textToHighlight={text ? text.toString() : ''}
         />
@@ -168,11 +145,11 @@ const getColumnSearchProps = (
     
 
  export function GetColumns(
-    searchText:     string,
-    searchedColumn: string,
+    searchText:     string | undefined,
+    searchedColumn: string | undefined,
     searchInput:    React.RefObject<InputRef>,
-    callbackSetSearchText:      (value: React.SetStateAction<string>) => void,
-    callbackSetSearchedColumn:  (value: React.SetStateAction<string>) => void
+    callbackSetSearchText:      (value: React.SetStateAction<string | undefined>) => void,
+    callbackSetSearchedColumn:  (value: React.SetStateAction<string | undefined>) => void
  ): ColumnsType<DataType> {
 
 const columns: ColumnsType<DataType> =  
@@ -220,21 +197,6 @@ const columns: ColumnsType<DataType> =
             ),
         },
         {
-            title: 'Date',
-            dataIndex: 'date',
-            key: 'date',
-            ...getColumnSearchProps(
-                'date',
-                searchInput,    
-                searchText,     
-                searchedColumn, 
-                callbackSetSearchText,      
-                callbackSetSearchedColumn
-            ),
-            sorter: (a, b) => a.date.length - b.date.length,
-            sortDirections: ['descend', 'ascend'],
-        },
-        {
         title: 'Description',
         dataIndex: 'description',
         key: 'description',
@@ -248,6 +210,21 @@ const columns: ColumnsType<DataType> =
         ),
         },
         {
+          title: 'Date',
+          dataIndex: 'date',
+          key: 'date',
+          ...getColumnSearchProps(
+              'date',
+              searchInput,    
+              searchText,     
+              searchedColumn, 
+              callbackSetSearchText,      
+              callbackSetSearchedColumn
+          ),
+          sorter: (a, b) => a.date.length - b.date.length,
+          sortDirections: ['descend', 'ascend'],
+        },
+        {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
@@ -256,9 +233,3 @@ const columns: ColumnsType<DataType> =
     return columns;
  }
  
- 
-
-
-export function GetData(): DataType[] {
-    return data;
-};

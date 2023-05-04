@@ -15,6 +15,7 @@ import {
   InfoCircleOutlined,
   HomeOutlined
 } from '@ant-design/icons';
+import ArticalPage from './components/articalPage/ArticalPage';
 
 
 const { Header, Content, Footer } = Layout;
@@ -121,6 +122,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/articles" element={<Articles/>}/>
+              <Route path="/articles/:id" element={<ArticalPage/>}/>
             </Routes>
           </div>
 
