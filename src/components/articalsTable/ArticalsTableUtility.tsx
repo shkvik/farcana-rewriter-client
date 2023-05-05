@@ -7,7 +7,7 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
 
 
-export interface DataType {
+export interface ArticalTableDataType {
     key:    number;
     title:  string;
     author: string;
@@ -16,7 +16,18 @@ export interface DataType {
     action: any;
 }
 
-type DataIndex = keyof DataType;
+export interface ArticalDataType {
+  key:     number;
+  title:   string;
+  author:  string;
+  article: string;
+  date:    string;
+  description:  string;
+  articalRewrited: string;
+}
+
+
+type DataIndex = keyof ArticalTableDataType;
 
 const handleSearch = (
     selectedKeys: string[],
@@ -46,7 +57,7 @@ const getColumnSearchProps = (
     callbackSetSearchText:      (value: React.SetStateAction<string | undefined>) => void,
     callbackSetSearchedColumn:  (value: React.SetStateAction<string | undefined>) => void
 
-    ): ColumnType<DataType> => ({
+    ): ColumnType<ArticalTableDataType> => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div style={{ padding: 8 }} onKeyDown={(e) => e.stopPropagation()}>
         <Input
@@ -150,9 +161,9 @@ const getColumnSearchProps = (
     searchInput:    React.RefObject<InputRef>,
     callbackSetSearchText:      (value: React.SetStateAction<string | undefined>) => void,
     callbackSetSearchedColumn:  (value: React.SetStateAction<string | undefined>) => void
- ): ColumnsType<DataType> {
+ ): ColumnsType<ArticalTableDataType> {
 
-const columns: ColumnsType<DataType> =  
+const columns: ColumnsType<ArticalTableDataType> =  
     [
         {
             title: 'Id',

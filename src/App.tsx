@@ -1,12 +1,13 @@
 import React from 'react';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, ConfigProvider, ThemeConfig } from 'antd';
 import type { MenuProps } from 'antd';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Articles from './pages/articles/Articles';
+import Logo from './farcanaLogo.svg'
 
 import {
-  DashboardOutlined,
+  FileTextOutlined ,
   SettingOutlined,
   ToolOutlined,
   StarOutlined,
@@ -18,7 +19,7 @@ import {
 import ArticalPage from './components/articalPage/ArticalPage';
 
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -36,101 +37,105 @@ const items: MenuItem[] = [
   {
     label: <Link to="/articles"> Articles </Link>,
     key: '0',
-    icon: <DashboardOutlined />,
+    icon: <FileTextOutlined  />,
   },
   {
-    label: <Link to="/home">Settings</Link>,
-    key: '1',
-    icon: <SettingOutlined />,
+    label: <Link to="/articles"> Articles </Link>,
+    key: '0',
+    icon: <FileTextOutlined  />,
   },
   {
-    label: <Link to="/developing">Tools</Link>,
-    key: '2',
-    icon: <ToolOutlined />,
-  },
-  {
-    label: <Link to="/developing">Favorites</Link>,
-    key: '3',
-    icon: <StarOutlined />,
-  },
-  {
-    label: <Link to="/developing">Archive</Link>,
-    key: '4',
-    icon: <DatabaseOutlined />,
-  },
-  
-  {
-    label: <Link to="/about">About</Link>,
-    key: '6',
-    icon: <InfoCircleOutlined />,
-  },
-  {
-    label: <Link to="/">Home</Link>,
-    key: '7',
-    icon: <HomeOutlined />,
-  },
-  {
-    label: <Link to="/developing">Search</Link>,
-    key: '5',
-    icon: <SearchOutlined />,
+    label: <Link to="/articles"> Articles </Link>,
+    key: '0',
+    icon: <FileTextOutlined  />,
   },
 ];
 
-
+const custTheme: ThemeConfig = {
+  token: {
+    colorLink: '#1890ff',
+    colorPrimaryBg: '#e6f7ff',
+    colorPrimary: '#524F9D',
+    //fontFamily: 'Courier',
+    //colorBgLayout: '#06090E',
+    //colorBgContainer: '#06090E',
+    colorBgMask: 'blue',
+    //colorText: '#437FB1',
+    colorPrimaryTextHover: 'black'
+  },
+}
 
 const App: React.FC = () => {
   
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  // theme = custTheme;
+
+  // const {
+  //   token: { colorBgContainer },
+  // } = theme.useToken();
 
   return (
     <Router>
-      <Layout>
-        <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
-          <div
-            style={{
-              float: 'left',
-              width: 120,
-              height: 31,
-              margin: '16px 24px 16px 0',
-              background: 'rgba(255, 255, 255, 0.2)',
-            }}
-          />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            items= {items}
+       <ConfigProvider theme={custTheme}>
+       
+        <Layout>
+          <Header style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}>
+            <div
+              style={{
+                display: 'flex',
+                float: 'left',
+                width: 140,
+                height: 31,
+                margin: '16px 24px 16px 0',
+                textAlign: 'center',
+                alignItems: 'center'
+              }}
+            > <img src={Logo} alt="Logo" /> </div>
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={['2']}
+              items= {items}
 
-          />
-        </Header>
-        <Content className="site-layout" style={{ padding: '0 50px' }}>
+            />
+          </Header>
+          
+          <Content className="site-layout" style={{ padding: '0 50px' }}>
 
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb> 
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>List</Breadcrumb.Item>
+              <Breadcrumb.Item>App</Breadcrumb.Item>
+            </Breadcrumb> 
 
-          <div style={{ 
-            padding: 24,
-            minHeight: "75vh", 
-            background: colorBgContainer 
-          }}>
+            <div style={{
+              paddingTop: 20,
+              paddingLeft: 200,
+              paddingRight: 200,
+              minHeight: "75vh", 
+            }}>
+              {/* <Sider width={20}>
+                <Menu
+                  mode="inline"
+                  defaultSelectedKeys={['1']}
+                  defaultOpenKeys={['sub1']}
+                  style={{ height: '100%' }}
+                  items={items}
+                />
+              </Sider> */}
 
-            <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/articles" element={<Articles/>}/>
-              <Route path="/articles/:id" element={<ArticalPage/>}/>
-            </Routes>
-          </div>
+              <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/articles" element={<Articles/>}/>
+                <Route path="/articles/:id" element={<ArticalPage/>}/>
+              </Routes>
+            </div>
 
-         
+          
 
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
-        </Layout> 
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+          </Layout> 
+        </ConfigProvider>
       </Router>
 
     
