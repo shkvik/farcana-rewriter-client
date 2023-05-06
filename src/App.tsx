@@ -109,19 +109,10 @@ const App: React.FC = () => {
 
             <div style={{
               paddingTop: 20,
-              paddingLeft: 200,
-              paddingRight: 200,
+              paddingLeft: 100,
+              paddingRight: 100,
               minHeight: "75vh", 
             }}>
-              {/* <Sider width={20}>
-                <Menu
-                  mode="inline"
-                  defaultSelectedKeys={['1']}
-                  defaultOpenKeys={['sub1']}
-                  style={{ height: '100%' }}
-                  items={items}
-                />
-              </Sider> */}
 
               <Routes>
                 <Route path="/" element={<Home/>}/>
