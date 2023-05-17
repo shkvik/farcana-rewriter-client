@@ -1,25 +1,15 @@
 import React from 'react';
-import { Breadcrumb, Layout, Menu, theme, ConfigProvider, ThemeConfig } from 'antd';
+import { Breadcrumb, Layout, Menu, ConfigProvider, ThemeConfig } from 'antd';
 import type { MenuProps } from 'antd';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Articles from './pages/articles/Articles';
 import Logo from './farcanaLogo.svg'
-
-import {
-  FileTextOutlined ,
-  SettingOutlined,
-  ToolOutlined,
-  StarOutlined,
-  DatabaseOutlined,
-  SearchOutlined,
-  InfoCircleOutlined,
-  HomeOutlined
-} from '@ant-design/icons';
+import { FileTextOutlined } from '@ant-design/icons';
 import ArticalPage from './components/articalPage/ArticalPage';
 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -34,16 +24,6 @@ const Home: React.FC = () => {
 
 
 const items: MenuItem[] = [
-  {
-    label: <Link to="/articles"> Articles </Link>,
-    key: '0',
-    icon: <FileTextOutlined  />,
-  },
-  {
-    label: <Link to="/articles"> Articles </Link>,
-    key: '0',
-    icon: <FileTextOutlined  />,
-  },
   {
     label: <Link to="/articles"> Articles </Link>,
     key: '0',
@@ -67,11 +47,6 @@ const custTheme: ThemeConfig = {
 
 const App: React.FC = () => {
   
-  // theme = custTheme;
-
-  // const {
-  //   token: { colorBgContainer },
-  // } = theme.useToken();
 
   return (
     <Router>
@@ -128,18 +103,7 @@ const App: React.FC = () => {
           </Layout> 
         </ConfigProvider>
       </Router>
-
-    
-    
   );
 };
 
 export default App;
-
-//<div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-//
-//<Routes>
-//  <Route path="/articles" Component={Articles}/>
-//  <Route path="/home" Component={Home}/>
-//</Routes>
-//</div>
